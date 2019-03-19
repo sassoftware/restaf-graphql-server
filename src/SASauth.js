@@ -33,7 +33,7 @@ async function SASauth (hapiServer) {
     authCookieOptions = {
         password  : uuid.v4(),
         cookie    : 'authCookie',
-        domain    : process.env.APPHOST,
+        /* domain    : process.env.APPHOST,*/
         isSecure  : false,
         isSameSite: (process.env.SAMESITE != null) ? process.env.SAMESITE : 'Strict',
         
@@ -49,8 +49,12 @@ async function SASauth (hapiServer) {
             }
         }
         
+    };
+
+    if (process.env.COOKIEDOMAIN !== 'NONE') {
+        authCookieOptions.domain = process.env.APPHOST;
     }
-    ;
+    
     if (process.env.OAUTH2 === 'YES') {
         let authURL = process.env.VIYA_SERVER ;
         provider = {
