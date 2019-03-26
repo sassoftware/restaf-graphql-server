@@ -23,8 +23,6 @@
 
 async function getImage (reportsList, args, context) { 
     let {store} = context;
-    debugger;
-    console.log(`in getIframe ${reportsList.itemsList(0)}`);
     let image = await reportImage(store, reportsList);
     return image;
 }

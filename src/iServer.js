@@ -49,38 +49,6 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     }
  
     let app = Hapi.server(sConfig);
-    
-    // await app.initialize();
-    /*
-    const goodOptions = {
-        ops: {
-            interval: 1000
-        },
-        reporters: {
-            myConsoleReporter: [
-                {
-                    module: 'good-squeeze',
-                    name  : 'Squeeze',
-                    args  : [{ log: '*', response: '*' }]
-                },
-                {
-                    module: 'good-console'
-                },
-                'stdout'
-            ]
-        }
-    };
-
-    if ()
-    await app.register({
-        plugin: require('good'),
-        goodOptions,
-    });
-    */
-
-    //
-    // setup cache
-    //
 
     let nodeCacheOptions = {
         stdTTL        : 36000,

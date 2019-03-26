@@ -18,8 +18,6 @@
 'use strict';
 
 async function getIframe (parent) {
-    debugger;
-    console.log(`in getIframe ${parent.itemsList(0)}`);
     let uri = parent.itemsCmd(parent.itemsList(0), 'self', 'link', 'uri');
     let options = "&appSwitcherDisabled=true&reportViewOnly=true&printEnabled=true&sharedEnabled=true&informationEnabled=true&commentEnabled=true&reportViewOnly=true";
     let href = `${process.env.VIYA_SERVER}/SASReportViewer/?reportUri=${uri}${options}`;
