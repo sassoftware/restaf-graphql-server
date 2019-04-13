@@ -30,9 +30,9 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     // initial setup of hapi
     //
     let sConfig = {
-        port : process.env.APPPORT,
-        host : process.env.APPHOST,
-        debug: {request: ['error', 'log']},
+        port: process.env.APPPORT,
+        host: process.env.APPHOST,
+       // debug: {request: ['error', 'log']},
        
         routes: {
             cors: {
@@ -143,8 +143,9 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //    
     
     await app.start();
-    let rootName = (process.env.APPNAME == null) ? '' : process.env.APPNAME;
-    console.log(` server started at: ${app.info.uri}/${rootName}`);
+    let rootName = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '' : process.env.APPNAME;
+    let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : server.info.uri;
+    console.log(` To view app goto ${u}/${rootName}`);
 }
 
 module.exports = iServer;

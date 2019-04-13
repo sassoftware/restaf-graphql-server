@@ -28,8 +28,8 @@ let auth = {
 
 function routeTable (appEnv, userRoutes) {
   
-    let root = (process.env.APPNAME == null)  ? '/' : `/${process.env.APPNAME}`;
-    let homeb = home.bind(null, appEnv);
+    let root       = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '/' : `/${process.env.APPNAME}`;
+    let homeb      = home.bind(null, appEnv);
     let getAppEnvb = getAppEnv.bind(null, appEnv);
     
     let defaultRouteTable =

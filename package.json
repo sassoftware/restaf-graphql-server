@@ -7,8 +7,11 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "node test.js --env=test.env --appenv=testEnv.js",
-    "test": "node test.js --env=test.env --appenv=testEnv.js",
-    "debug": "node --inspect-brk test.js --env=test.env --appenv=testEnv.js"
+    "test": "node test.js --env=../graphql.env --appenv=testEnv.js",
+    "indocker": "node test.js --appenv=testEnv.js",
+    "debug": "node --inspect-brk test.js --env=graphql.env --appenv=testEnv.js",
+    "dockerbuild": "docker build -t graphqlapp .",
+    "dockerrun": "docker run -p 8080:8080 graphqlapp"
   },
   "repository": {
     "type": "git",
@@ -37,7 +40,7 @@
     "hapi-server-session": "^4.3.1",
     "inert": "^5.1.2",
     "node-cache-promise": "^1.0.0",
-    "restaf": "^1.0.1",
+    "restaf": "^1.2.0",
     "uuid": "^3.3.2",
     "yar": "^9.1.0",
     "yargs": "^13.2.2"

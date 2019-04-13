@@ -25,6 +25,7 @@
  let sasPrint         = require('./sasPrint');
  let sasOds           = require('./sasOds');
  let sasLog           = require('./sasLog');
+
 const Query = {
     reports     : (parent, args, context, info) => getReports(parent, args, context, info),
     reportByName: (parent, args, context, info) => getContentByName(parent, args, context, info),

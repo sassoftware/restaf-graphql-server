@@ -22,14 +22,14 @@ let fs  = require('fs');
 let dns = require('dns');
 let os  = require('os');
 
-
 function config (appEnv, cb) {
 
     if (appEnv === null) {
         fixServer();
         cb(null, null);
+    } else {
+      iconfig(appEnv, cb);
     }
-    iconfig(appEnv, cb);
 }
 
 function iconfig (appEnv, cb) {

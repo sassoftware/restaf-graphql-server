@@ -69,23 +69,16 @@ async function setupRestaf (credentials) {
         host     : process.env.VIYA_SERVER,
         token    : credentials.token,
         tokenType: 'bearer'
-    }
+    };
     await store.logon (payload);
 
-    let defaultServices = [
-        'reports',
-        'reportImages',
-        'reportTransforms',
-        'compute',
-        'casManagement',
-        'files',
-        'jobExecution' 
-    ];
-
     if (process.env.SERVICES != null) {
-        defaultServices.concat (getUserServices());
+        let defaultServices;
+        defaultServices = getUserServices();
+        console.log(defaultServices);
+        await store.addServices(...defaultServices);
     }
-    await store.addServices(...defaultServices);
+
     return store;
 }
 
