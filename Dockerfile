@@ -4,21 +4,23 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 8080
+EXPOSE 5000
 
 ENV APPNAME graphqlapp
+ENV APPENTRY index.html
 ENV APPLOC ./public
 ENV APPHOST 0.0.0.0
-ENV APPPORT 8080
-ENV VIYASERVER http://xxxxxx
+ENV APPPORT 5000
+ENV VIYA_SERVER http://<your Viya server>
 #
 # Clientid and ClientSecret
 # You need to obtain it either thru your admin or by using ways described in the Viya Admin doc.
 # Ignored if PROXYSERVER is NO
 # samples shown below
 #
+
 ENV AUTHFLOW server
-ENV CLIENTID graphqlapp
+ENV CLIENTID local5000
 ENV CLIENTSECRET secret
 
 #
