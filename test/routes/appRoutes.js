@@ -21,7 +21,7 @@ let uuid = require('uuid');
 function appRoutes () {
     let routes = {
         method: ['GET'],
-        path  : `${process.env.APPNAMME}`,
+        path  : `${process.env.APPNAME}`,
         config: {
             auth   : true,
             handler: getApp

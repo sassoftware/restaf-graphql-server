@@ -44,7 +44,7 @@ function routeTable (appEnv, userRoutes) {
             }, 
             {
                 method: ['GET'],
-                path  : `/{param*}`,
+                path  : `${root}/{param*}`,
                 config: {
                     auth   : auth,
                     handler: getApp2

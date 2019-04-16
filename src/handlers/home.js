@@ -18,6 +18,7 @@
 'use strict';
 let uuid   = require('uuid');
 let restaf = require('restaf');
+let fs     = require('fs');
 
 async function home(appEnv, req, h){
     debugger;
@@ -63,7 +64,14 @@ async function home(appEnv, req, h){
 //
 async function setupRestaf (credentials) {
 
-    let store = restaf.initStore();
+    let options = null;
+    let pemE = process.env.PEMFILE;
+
+    if (pemE != null) {
+        let pem = fs.readFileSync(`${process.env.PEMFILE}`);
+        options = {pem: pem};
+    }
+    let store = restaf.initStore(options);
     let payload = {
         authType : 'server',
         host     : process.env.VIYA_SERVER,

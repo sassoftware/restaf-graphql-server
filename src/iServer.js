@@ -29,6 +29,8 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //
     // initial setup of hapi
     //
+
+    let appName = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '' : process.env.APPNAME;
     let sConfig = {
         port: process.env.APPPORT,
         host: process.env.APPHOST,
@@ -64,6 +66,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //
     // setup ApolloServer
     //
+    let t = (process.env.APPHOST === '0.0.0.0') ? `localhost` : `${process.env.APPHOST}`;
     const server = new ApolloServer(
         { 
             typeDefs, 
@@ -87,7 +90,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
                     'request.credentials': 'include', // possible values: 'omit', 'include', 'same-origin'
         
                     'schema.polling.enable'        : true, // enables automatic schema polling
-                    'schema.polling.endpointFilter': `*{process.env.APPHOST}*`, // endpoint filter for schema polling
+                    'schema.polling.endpointFilter': `*${t}*`, // endpoint filter for schema polling
                     'schema.polling.interval'      : 2000, // schema polling interval in ms
                     'schema.disableComments'       : false,
                     'tracing.hideTracingResponse'  : true
@@ -143,9 +146,9 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //    
     
     await app.start();
-    let rootName = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '' : process.env.APPNAME;
+   
     let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : server.info.uri;
-    console.log(` To view app goto ${u}/${rootName}`);
+    console.log(` To view app goto ${u}/${appName}`);
 }
 
 module.exports = iServer;
