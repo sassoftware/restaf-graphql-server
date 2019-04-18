@@ -28,8 +28,8 @@
         debugger;
         let href = `${window.location.origin}${window.location.pathname}`;
         if ( w === '/graphql') {
-           // href = `${window.location.protocol}//${window.location.host}$`;
-           href=`${window.location.origin}${window.location.pathname}`;
+           // href = `${window.location.protocol}//${window.location.host}`;
+           href = window.location.origin;
         }
         href =`${href}${w}`;
         console.log(href);

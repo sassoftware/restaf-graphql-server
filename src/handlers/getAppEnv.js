@@ -23,9 +23,10 @@ async function getAppEnv (appEnv) {
     if (appEnv !== null) {
         env = `let APPENV = ${JSON.stringify(appEnv)};`;
     } else {
-        env = `let APPENV = {none: 'none'};`;
+        env = `let APPENV = {appHost: '${process.env.APPNAME}'};`;
     }
-   return env;
+    let l = `let APPNAME = {appHost: '/${process.env.APPNAME}'};`;
+    return env + l;
 }
 
 module.exports = getAppEnv;
