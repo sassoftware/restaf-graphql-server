@@ -16,13 +16,13 @@
  *
  */
 'use strict';
-let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
-    let {store}   = context;
-    let logResult = `<h1> No log </h1>`
-    if (parent.log !== null) {
-        let result = await store.apiCall(parent.log);
-        logResult = logLines(result);
-    }
-    return logResult;
+// eslint-disable-next-line no-unused-vars
+let getSASTableRows = require('../lib/getSasTableRows');
+module.exports = async function products (parent, args, context){
+    debugger;
+    let {store} = context;
+    let r = await getSASTableRows(store, parent, 'BUDGET');
+    return r;
 }
+
+

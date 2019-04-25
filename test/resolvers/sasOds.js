@@ -16,12 +16,14 @@
  *
  */
 'use strict';
-module.exports = async function sasOds(parent,args,context){
+module.exports = async function sasOds (parent,args,context){
+    debugger;
     let {store}   = context;
     let odsResult = `<h1> No ODS output</h1>`;
     if (parent.ods !== null) {
-         odsResult = await store.apiCall(parent.ods);
+         let r  = await store.apiCall(parent.ods);
+         odsResult = r.items();
     }
-    return odsResult.items();
+    return odsResult;
     
 }

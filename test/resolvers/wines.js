@@ -16,31 +16,13 @@
  *
  */
 'use strict';
-let uuid = require('uuid');
 
-function appRoutes () {
-    let routes = {
-        method: ['GET'],
-        path  : `${process.env.APPNAME}`,
-        config: {
-            auth   : true,
-            handler: getApp
-        }
-    }
-    return routes;
-}
-
-async function getApp (req, h) {
+let getSasTableRows = require('../lib/getSASTableRows');
+// eslint-disable-next-line no-unused-vars
+module.exports = async function wines (parent, args, context){
     debugger;
-    const sid = uuid.v4();
-
-    await req.server.app.cache.set(sid, req.auth.credentials);
-    console.log('in getAuth');
-    console.log(req.server.app.cache.sid);
-    req.cookieAuth.set({ sid });
-
-    let indexHTML = (process.env.APPENTRY == null) ? 'index.html' : process.env.APPENTRY;
-    return h.file(`${indexHTML}`);
+    let {store} = context;
+    let rows= await getSasTableRows(store, parent, 'WINE');
+    return rows;
 
 }
-module.exports = appRoutes;

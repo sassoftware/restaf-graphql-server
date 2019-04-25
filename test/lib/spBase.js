@@ -17,18 +17,23 @@
  */
 'use strict';
 
-let findReport = require('../lib/findReport');
+let runCompute = require('./runCompute');
 
-module.exports = async function getContentByName(parent, args, context){
-    debugger;
-    let {store} = context;
-    let name   = args.name;
-    console.log(`in getContentByName ${name}`);
-    // find report and let graphql pass it on to the children
-    let reportsList = await findReport (store, name);
-    debugger;
-    if (reportsList === null) {
-        throw `${name} was not found`;
+module.exports = async function spBase (store, args, src){
+ 
+    // generate macro variables
+
+    let code =[];
+    for (let arg in args) {
+        let c = `%let ${arg} = ${args[arg]};`;
+        code.push(c);
     }
-    return reportsList;
+ 
+    // Concat macro to code
+    let asrc = src.split(/\r?\n/);
+    code = code.concat(asrc);
+
+    // run code and get results
+    let resultSummary = await runCompute(store, code);
+    return resultSummary;
 }

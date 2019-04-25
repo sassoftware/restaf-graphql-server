@@ -15,14 +15,24 @@
  * ---------------------------------------------------------------------------------------
  *
  */
-'use strict';
-let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
-    let {store}   = context;
-    let logResult = `<h1> No log </h1>`
-    if (parent.log !== null) {
-        let result = await store.apiCall(parent.log);
-        logResult = logLines(result);
-    }
-    return logResult;
-}
+data wineList;  
+ input year cabernet merlot pinot chardonnay twobit ;  
+ cards;  
+ 2000 10 20 30 40 50   
+ 2001 5 10 15 5 0  
+ 2002 6 7 11 12 13  
+ 2003 5 8 0 0 50 
+ 2004 11 5 7 8 100  
+ 2005 1  1 0 0 1000  
+ 2006 0 0 0 0 3000  
+;;;;  
+run;  
+    
+data wine ;  
+set winelist( where= (year GE &from && year LE &to));  
+total = cabernet + merlot + pinot + chardonnay + twobit;  
+run;  
+  
+ods html style=barrettsblue;  
+    proc print data=wine;run;  
+ods html close;run  

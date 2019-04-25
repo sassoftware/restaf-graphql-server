@@ -15,37 +15,8 @@
  * ---------------------------------------------------------------------------------------
  *
  */
-'use strict';
-let scoreMain = require('../lib/scoreMain');
-
-module.exports = async function getLoanScore (parent, args, context) {
-
-    let { store } = context;
-
-    let input = {
-        JOB    : 'J1',
-        CLAGE  : 100, 
-        CLNO   : 20, 
-        DEBTINC: 20, 
-        DELINQ : 2, 
-        DEROG  : 0, 
-        MORTDUE: 4000, 
-        NINQ   : 1,
-        YOJ    : 10
-    };
-
-    input.LOAN  = args.amount;
-    input.VALUE = args.assets;
-
-    let env = {
-        astore: {
-            caslib: 'Public',
-            name  : 'GRADIENT_BOOSTING___BAD_2'
-
-        }
-    }
-    let score = await scoreMain(store, input, env);
-    let adjustedScore = Math.round(score.score['P_BAD'] * 450+350)
-    return adjustedScore;
-
-}
+ 
+ data budget;
+ whitechocolate= &budget*10;
+ darkchocolate = &budget*20;
+ run;

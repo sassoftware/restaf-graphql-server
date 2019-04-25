@@ -16,13 +16,11 @@
  *
  */
 'use strict';
-let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
-    let {store}   = context;
-    let logResult = `<h1> No log </h1>`
-    if (parent.log !== null) {
-        let result = await store.apiCall(parent.log);
-        logResult = logLines(result);
+module.exports = async function sasTables (parent){
+    let names = [];
+    for (const key in parent.tables) {
+        let name = {name: parent.tables[key] }
+        names.push(name);
     }
-    return logResult;
+    return names;
 }

@@ -17,36 +17,13 @@
  */
 'use strict';
 
-let computeSummary = require('../lib/computeSummary');
-module.exports = async function sasPrint(_, args, context){
+let spBase = require('../lib/spBase');
+module.exports = async function sasPrint (_, args, context){
     let {store} = context;
-    let table   = args.table;
-
-    let ds = `proc print data=${table};run;`;
-    let code = [
-        'ods html style=barrettsblue;',
-        `${ds}`,
-        'ods html close;run;'];
-    let resultSummary = await computeRun(store, code);
+    let code = `
+        ods html style=barrettsblue;
+        proc print data=&table;run;
+        ods html close;run;'`;
+    let resultSummary = await spBase(store, args, code);
     return resultSummary;
 }
-
-async function computeRun(store, code) {
-    let compute = store.getService('compute');
-    let contexts  = await store.apiCall(compute.links('contexts'));
-    // lookup the name of the first context and then use it to get the associated createSession restafLink
-    let createSession = contexts.itemsCmd(contexts.itemsList(0), 'createSession');
-    let session  = await store.apiCall(createSession);
-    let payload  = {
-        data: {code: code}
-    };
-    // Now execute the data step and wait for completion
-    let job    = await store.apiCall(session.links('execute'), payload);
-    let status = await store.jobState(job, null, 5, 2);
-    if (status.data === 'running') {
-        throw `ERROR: Job did not complete in alloted time`;
-    } else {
-        let results = await computeSummary (store, status.job);
-        return results;
-        }
-    }

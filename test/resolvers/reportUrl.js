@@ -16,13 +16,11 @@
  *
  */
 'use strict';
-let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
-    let {store}   = context;
-    let logResult = `<h1> No log </h1>`
-    if (parent.log !== null) {
-        let result = await store.apiCall(parent.log);
-        logResult = logLines(result);
-    }
-    return logResult;
+
+module.exports = async function reportUrl (reportList) {
+    debugger;
+    let uri = reportList.itemsCmd(reportList.itemsList(0), 'self', 'link', 'uri');
+    let options = "&appSwitcherDisabled=true&reportViewOnly=true&printEnabled=true&sharedEnabled=true&informationEnabled=true&commentEnabled=true&reportViewOnly=true";
+    let href = `${process.env.VIYA_SERVER}/SASReportViewer/?reportUri=${uri}${options}`;
+    return href;
 }

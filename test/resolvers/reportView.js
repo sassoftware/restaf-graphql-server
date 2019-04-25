@@ -16,13 +16,14 @@
  *
  */
 'use strict';
-let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
-    let {store}   = context;
-    let logResult = `<h1> No log </h1>`
-    if (parent.log !== null) {
-        let result = await store.apiCall(parent.log);
-        logResult = logLines(result);
-    }
-    return logResult;
+
+let findReport = require('../lib/findReport');
+
+module.exports = async function reportView (_, args, context){
+    debugger;
+    let {store} = context;
+
+    // find the report and let graphql route it to get url and image as required
+    let reportsList = await findReport(store, args.name);
+    return reportsList;
 }

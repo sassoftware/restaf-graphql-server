@@ -16,13 +16,26 @@
  *
  */
 'use strict';
-let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
-    let {store}   = context;
-    let logResult = `<h1> No log </h1>`
-    if (parent.log !== null) {
-        let result = await store.apiCall(parent.log);
-        logResult = logLines(result);
+// eslint-disable-next-line no-unused-vars
+module.exports = async function getSasTableRows(store, computeSummary, tableName){
+    debugger;
+    let tableLink = computeSummary.tables[tableName];
+    let table     = await store.apiCall(tableLink);
+    let columns   = table.items('columns');
+
+    let rows = table.items('rows');
+    let result = [];
+
+    let count = rows.size;
+    for (let i=0; i < count; i++) {
+        let row = rows.get(i);
+        let r = {};
+        columns.map((c,i) => {
+           let varx = c.toLowerCase();
+           r[varx] = row.get(i);
+        });
+        result.push(r);
     }
-    return logResult;
+    return result;
+
 }

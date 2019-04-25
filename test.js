@@ -15,30 +15,46 @@
  * ---------------------------------------------------------------------------------------
  *
  */
-    let restafApolloServer     = require('./src/index');
-    let resolvers              = require('./test/resolvers');
-    let typeDefs               = require('./test/schema/schema.graphql');
-    let testRoute              = require('./testRoute')
-    let userRoutes             = getUserRoutes();
-   
-    debugger;
-    restafApolloServer(typeDefs, resolvers,userRoutes);
 
-    function getUserRoutes () {
-      let handler =
-          [
-              {
-                  method: ['GET'],
-                  path  : `/test/{param*}`,
-                  config: {
-                      auth   : false,
-                      cors   : true,
-                      handler: testRoute
-                  }
+let restafGraphqlServer     = require('./src/index');
+   
+// let restafGraphqlServer = require('restaf-graphql-server');
+let resolvers           = require('./test/resolvers');
+let typeDefs            = require('./test/schema/schema.graphql');
+let userRoutes          = getUserRoutes(); /* set to null if you have no custom routes */
+
+debugger;
+
+// 
+// Start server
+//
+
+restafGraphqlServer(typeDefs, resolvers,userRoutes);
+
+// 
+// You can have as many additional routes as you want
+// Reserved paths: /, /graphql, /appenv, /shared/{param*} /{param*}
+// The code below is for demo purpose only
+//
+function getUserRoutes () {
+  let handler =
+      [
+          {
+              method: ['GET'],
+              path  : `/test/{param*}`,
+              config: {
+                  auth   : false,
+                  cors   : true,
+                  handler: testRoute
               }
-  
-          ];
-      return handler;
-  }
-  
-  
+          }
+
+      ];
+  return handler;
+}
+
+// eslint-disable-next-line no-unused-vars
+async function testRoute (req, h){
+return 'Hello';
+}
+
