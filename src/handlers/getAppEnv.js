@@ -19,7 +19,6 @@
 
 async function getAppEnv (appEnv) {
     let env;
-    debugger;
     if (appEnv !== null) {
         env = `let APPENV = ${JSON.stringify(appEnv)};`;
     } else {

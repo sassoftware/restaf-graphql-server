@@ -19,7 +19,6 @@
 
 let bell       = require('bell'),
 // eslint-disable-next-line no-unused-vars
-    debugAuth  = require('debug')('auth'),
     uuid       = require('uuid'),
     cookie     = require('hapi-auth-cookie');
 
@@ -37,10 +36,8 @@ async function SASauth (hapiServer) {
         isSameSite: (process.env.SAMESITE != null) ? process.env.SAMESITE : 'Strict',
         
         validateFunc: async function (req, session) {
-            debugAuth('Getting credentials from cache');
-            debugAuth('session.sid' + session.sid);
             let credentials = await req.server.app.cache.get(session.sid);
-            debugAuth(credentials);
+
             return {
                 valid      : true,
                 credentials: credentials,

@@ -21,7 +21,6 @@ let restaf = require('restaf');
 let fs     = require('fs');
 
 async function home(appEnv, req, h){
-    debugger;
     //
     // create id for user session and save credentials and set cookie in response
     //
