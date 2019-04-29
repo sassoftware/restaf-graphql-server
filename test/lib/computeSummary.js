@@ -15,10 +15,6 @@
  *
  */
 
- //
- // collects important relevant information from a compute server run.
- // This is particularly useful for getting to the tables easily in the rest of the app
- //
 async function computeSummary (store, job){
     debugger;
     let cResult = {
@@ -42,8 +38,8 @@ async function computeSummary (store, job){
                     cResult.ods = results.itemsCmd(resultItem, 'self');
                 } else if (type === 'table') {
                     let t1 = await store.apiCall(results.itemsCmd(resultItem, 'self'));
-                    // let rowSet = await store.apiCall(t1.links('rowSet'));
-                    cResult.tables[resultItem] = t1.links('rowSet');
+                    let rowSet = await store.apiCall(t1.links('rowSet'));
+                    cResult.tables[resultItem] = rowSet;
                 } else {
                     console.log (`what is ${type} ?`)
                 }

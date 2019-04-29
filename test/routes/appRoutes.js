@@ -16,24 +16,31 @@
  *
  */
 'use strict';
+let uuid = require('uuid');
 
-let runCompute = require('./runCompute');
-
-module.exports = async function spBase (store, args, src){
- 
-    // generate macro variables
-
-    let code =[];
-    for (let arg in args) {
-        let c = `%let ${arg} = ${args[arg]};`;
-        code.push(c);
+function appRoutes () {
+    let routes = {
+        method: ['GET'],
+        path  : `${process.env.APPNAME}`,
+        config: {
+            auth   : true,
+            handler: getApp
+        }
     }
- 
-    // Concat macro to code
-    let asrc = src.split(/\r?\n/);
-    code = code.concat(asrc);
-
-    // run code and get results
-    let resultSummary = await runCompute(store, code);
-    return resultSummary;
+    return routes;
 }
+
+async function getApp (req, h) {
+    debugger;
+    const sid = uuid.v4();
+
+    await req.server.app.cache.set(sid, req.auth.credentials);
+    console.log('in getAuth');
+    console.log(req.server.app.cache.sid);
+    req.cookieAuth.set({ sid });
+
+    let indexHTML = (process.env.APPENTRY == null) ? 'index.html' : process.env.APPENTRY;
+    return h.file(`${indexHTML}`);
+
+}
+module.exports = appRoutes;

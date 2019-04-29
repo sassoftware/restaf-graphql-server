@@ -17,7 +17,7 @@
  */
 'use strict';
 let logLines = require('../lib/logLines');
-module.exports = async function sasLog (parent,args,context){
+module.exports = async function sasLog(parent,args,context){
     let {store}   = context;
     let logResult = `<h1> No log </h1>`
     if (parent.log !== null) {

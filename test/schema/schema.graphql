@@ -15,59 +15,38 @@
  * ---------------------------------------------------------------------------------------
  *
  */
+
 const { gql } = require('apollo-server-hapi');
 const typeDefs = gql`
 
-    type Report {  
-        name      : String
-        modifiedBy: String
-        modifiedOn: String
-    }
+  type Report {  
+    id     : ID!
+    name   : String
+    content: Content
+  }
  
-    type ReportView {
-        url  : String
-        image: String
-    }
-
+  type Content {
+    id   : ID!
+    name : String
+    image: String
+    url  : String
+  }
 
   # The "Query" type is the root of all GraphQL queries.
   
-    type SASResults {
-        ods    : String
-        log    : String
-        tables : [String]
-    }
+  type SASResults {
+    id     : ID
+    ods    : String
+    log    : String
+  }
 
-    type Budget {
-        whitechocolate: Float
-        darkchocolate : Float
-    }
-
-    type WineProduction {
-        wines : [WineList]
-        report: SASResults
-    }
-
-    type WineList {
-        year      : Int
-        cabernet  : Int
-        merlot    : Int
-        pinot     : Int
-        chardonnay: Int
-        twobit    : Int
-        total     : Int
-      
-    }
-
-    type Query {
-        test   : String
-        reports: [Report]
-        report(name: String): ReportView
-        scoreLoan(amount: Int assets: Int): Float
-        sasPrint(table: String) : SASResults
-        budget(budget: Int): Budget
-        wineProduction(from: Int, to: Int): WineProduction
-    }
+  type Query {
+    test   : String
+    reports(name: String): [Report]
+    reportByName(name: String): Content
+    loanScore(amount: Int assets: Int): Float
+    sasPrint(table: String) : SASResults
+  }
 
 `;
 module.exports = typeDefs;
