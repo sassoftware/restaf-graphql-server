@@ -1,12 +1,12 @@
 # restaf-graphql-server
 
-The restaf-graphql-server is designed to work with SAS Vya. It uses two key open source projects"
+The restaf-graphql-server is designed to work with SAS Vya. It uses three key open source projects"
 
 1. [Apollo's graphql-server](https://www.apollographql.com/docs/apollo-server/)
 
 2. [hapijs](https://hapijs.com)
 
-It also depends on [restaf](https://github.com/sassoftware/restaf)
+3. [restaf](https://github.com/sassoftware/restaf)
 
 The primary purposes of this library are:
 
@@ -17,6 +17,8 @@ The primary purposes of this library are:
 3. Uses restaf to make REST calls to Viya Server
 
 See CHANGELOG.md for current and future features.
+
+Please see [restaf-graphql-demo](https://github.com/sassoftware/restaf-graphql-demo) for an example of using this server.
 
 ## Disclaimer
 
@@ -38,10 +40,10 @@ To start the server write a code as shown below in your app's entry point. This 
 ```javascript
     // app.js
     let restafGraphqlServer     = require('restaf-graphql-server');
-    let resolvers              = require('./test/resolvers'); // where your resolvers are 
+    let resolvers              = require('./test/resolvers'); // where your resolvers are
     let typeDefs               = require('./test/schema/schema.graphql'); // where your typeDefs are
-    let userRoutes             = null; 
-    // set your userRoutes if you have any 
+    let userRoutes             = null;
+    // set your userRoutes if you have any
     restafGraphqlServer(typeDefs, resolvers, userRoutes);
 
 
