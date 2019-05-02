@@ -65,11 +65,12 @@ function routeTable (appEnv, userRoutes) {
                     auth   : false,
                     handler: getAppEnvb
                 }
-            } 
+            }
         ];
 
+
     if (userRoutes !== null) {
-        defaultRouteTable.concat(userRoutes);
+        defaultRouteTable = defaultRouteTable.concat(userRoutes);
     }
     // console.log(defaultRouteTable);
 return defaultRouteTable

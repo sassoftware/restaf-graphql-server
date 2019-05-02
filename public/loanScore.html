@@ -112,7 +112,9 @@ function setup() {
     console.log(host);
 }
 function onSubmit() {
-    runScore()
+    let assets = document.getElementById('ASSET').value;
+    let amount = document.getElementById('AMOUNT').value;
+    runScore(amount, assets)
         .then( r => {
             viewDial(r);
         })
@@ -123,11 +125,7 @@ function onSubmit() {
         })
 }
 
-async function runScore(){
-    
-    let assets = document.getElementById('ASSET').value;
-    let amount = document.getElementById('AMOUNT').value;
-
+async function runScore(amount, assets){
     let payload = {
         query: `query {
             loanScore(amount: ${amount} assets: ${assets} )
