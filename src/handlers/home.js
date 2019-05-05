@@ -20,7 +20,7 @@ let uuid   = require('uuid');
 let restaf = require('restaf');
 let fs     = require('fs');
 
-async function home(appEnv, req, h){
+async function home(appEnv, req){
     //
     // create id for user session and save credentials and set cookie in response
     //
@@ -48,8 +48,7 @@ async function home(appEnv, req, h){
     // if start with a / thenn it is a route path. otherwise it is a asset like index.html
     //
 
-    return h.response().redirect('/graphql');
-
+    return 'OK';
    /*
     if (process.env.APPENTRY.indexOf('/') === 0) {
         console.log(`NOTE: Routed to ${process.env.APPENTRY}`);

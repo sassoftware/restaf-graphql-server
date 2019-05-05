@@ -49,7 +49,18 @@ function routeTable (appEnv, userRoutes) {
                     auth   : false,
                     handler: getAppEnvb
                 }
-            } 
+            },
+            {
+                method: ['GET'],
+                path  : `/logon`,
+                config: {
+                    auth: {
+                        mode    : 'required',
+                        strategy: 'sas'
+                        },
+                    handler: homeb
+                }
+            }
            
         ];
 

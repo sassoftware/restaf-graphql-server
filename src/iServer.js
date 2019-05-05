@@ -137,8 +137,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
        /* path : `/${process.env.APPNAME}/graphql`,*/
         route: {
             auth: {
-                mode    : 'required',
-                strategy: 'sas'
+                mode: 'optional'
                 }
             } 
         }
