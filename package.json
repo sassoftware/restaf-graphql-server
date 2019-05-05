@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node test.js --env=test.env --appenv=testEnv.js",
     "test": "node test.js --env=../graphql.env --appenv=testEnv.js",
+    "test2": "node test.js --env=../graphql2.env --appenv=testEnv.js",
     "indocker": "node test.js --appenv=testEnv.js",
     "debug": "node --inspect-brk test.js --env=graphql.env --appenv=testEnv.js",
     "dockerbuild": "docker build -t graphqlapp .",

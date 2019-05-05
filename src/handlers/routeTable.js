@@ -35,29 +35,13 @@ function routeTable (appEnv, userRoutes) {
     let defaultRouteTable =
         [
             {
-                method: ['GET'],
-                path  : root,
+                method: ['GET', 'POST'],
+                path  : `${root}callback`,
                 config: {
-                    auth   : auth,
+                    auth   : false,
                     handler: homeb
                 }
             }, 
-            {
-                method: ['GET'],
-                path  : `${root}/{param*}`,
-                config: {
-                    auth   : auth,
-                    handler: getApp2
-                }
-            },
-            {
-                method: ['GET'],
-                path  : `/shared/{param*}`,
-                config: {
-                    auth   : false,
-                    handler: getShared
-                }
-            },
             {
                 method: ['GET'],
                 path  : `/appenv`,
@@ -65,7 +49,8 @@ function routeTable (appEnv, userRoutes) {
                     auth   : false,
                     handler: getAppEnvb
                 }
-            }
+            } 
+           
         ];
 
 

@@ -24,6 +24,7 @@ async function home(appEnv, req, h){
     //
     // create id for user session and save credentials and set cookie in response
     //
+    console.log('in callback')
     const sid = uuid.v4();
     let cache = req.server.app.cache;
     // await req.server.app.cache.set(sid, req.auth.credentials);
@@ -47,7 +48,9 @@ async function home(appEnv, req, h){
     // if start with a / thenn it is a route path. otherwise it is a asset like index.html
     //
 
-   
+    return h.response().redirect('/graphql');
+
+   /*
     if (process.env.APPENTRY.indexOf('/') === 0) {
         console.log(`NOTE: Routed to ${process.env.APPENTRY}`);
         return h.response().redirect(process.env.APPENTRY);
@@ -55,6 +58,7 @@ async function home(appEnv, req, h){
         console.log(`NOTE: Displaying asset ${process.env.APPENTRY}`);
         return h.file(process.env.APPENTRY);
     } 
+    */
 }
 
 //
