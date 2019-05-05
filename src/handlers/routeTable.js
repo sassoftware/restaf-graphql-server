@@ -16,15 +16,12 @@
  *
  */
  'use strict';
-let home         = require('./home');
+let home         = require('./home')/*
 let getApp2      = require('./getApp2');
 let getShared    = require('./getShared');
+*/
 let getAppEnv    = require('./getAppEnv');
 
-let auth = {
-    mode    : 'required',
-    strategy: 'sas'
-}
 
 function routeTable (appEnv, userRoutes) {
   
