@@ -20,7 +20,7 @@ let uuid   = require('uuid');
 let restaf = require('restaf');
 let fs     = require('fs');
 
-async function home(appEnv, req){
+async function home(appEnv, req, h){
     //
     // create id for user session and save credentials and set cookie in response
     //
@@ -48,16 +48,17 @@ async function home(appEnv, req){
     // if start with a / then it is a route path. otherwise it is a asset like index.html
     //
 
-    return {status: 'logon was successfull'};
-   /*
-    if (process.env.APPENTRY.indexOf('/') === 0) {
-        console.log(`NOTE: Routed to ${process.env.APPENTRY}`);
-        return h.response().redirect(process.env.APPENTRY);
+    if (process.env.TESTMODE === 'YES') {
+        if (process.env.APPENTRY.indexOf('/') === 0) {
+            console.log(`NOTE: Routed to ${process.env.APPENTRY}`);
+            return h.response().redirect(process.env.APPENTRY);
+        } else {
+            console.log(`NOTE: Displaying asset ${process.env.APPENTRY}`);
+            return h.file(process.env.APPENTRY);
+        } 
     } else {
-        console.log(`NOTE: Displaying asset ${process.env.APPENTRY}`);
-        return h.file(process.env.APPENTRY);
+       return {status: 'logon was successfull'};
     } 
-    */
 }
 
 //
