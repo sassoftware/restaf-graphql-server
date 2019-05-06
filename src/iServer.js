@@ -146,7 +146,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     debugger;
     await app.start();
    debugger;
-    let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : server.info.uri;
+    let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : app.info.uri;
     console.log(`To logon to the server visit ${u}/${appName}`);
 }
 
