@@ -26,7 +26,7 @@ let getAppEnv    = require('./getAppEnv');
 
 function routeTable (appEnv, userRoutes) {
   
-    let root       = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '/logon' : `/${process.env.APPNAME}`;
+    let root       = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '/' : `/${process.env.APPNAME}`;
     let homeb      = home.bind(null, appEnv);
     // let getAppEnvb = getAppEnv.bind(null, appEnv);
     

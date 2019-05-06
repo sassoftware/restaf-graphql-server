@@ -134,7 +134,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //
 
     await server.applyMiddleware({app,
-       /* path : `/${process.env.APPNAME}/graphql`,*/
+       
         route: {
             auth: {
                 mode: 'optional'
