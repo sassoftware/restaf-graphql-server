@@ -20,5 +20,4 @@
 async function getApp2 (req, h) {
     return h.file(req.params.param);
 }
-
 module.exports = getApp2;
