@@ -19,7 +19,6 @@
 const { ApolloServer } = require('apollo-server-hapi');
 let Hapi      = require('hapi');
 let inert     = require('inert');
-let debug     = require('debug');
 let NodeCache = require('node-cache-promise');
 
 let routeTable   = require('./handlers/routeTable');
@@ -35,9 +34,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     let sConfig = {
         port: process.env.APPPORT,
         host: process.env.APPHOST,
-
-        debug: {request: ['error', 'log']},
-       
+     
         routes: {
             cors: {
                 origin     : ['*'],
@@ -69,10 +66,6 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     // setup ApolloServer
     //
     let t = (process.env.APPHOST === '0.0.0.0') ? `localhost` : `${process.env.APPHOST}`;
-    /*
-    let traceOn = debug('graphqltrace').enabled;
-    let debugon = debug('graphqldebug').enabled;
-    */
     const server = new ApolloServer(
         { 
             typeDefs, 
@@ -150,9 +143,9 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //
     // start hapi server
     //    
-    
+    debugger;
     await app.start();
-   
+   debugger;
     let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : server.info.uri;
     console.log(` To view app goto ${u}/${appName}`);
 }
