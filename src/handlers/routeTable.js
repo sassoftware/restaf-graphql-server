@@ -16,29 +16,23 @@
  *
  */
  'use strict';
-let home         = require('./home')/*
+/*let home         = require('./home');
 let getApp2      = require('./getApp2');
 let getShared    = require('./getShared');
 */
-let getAppEnv    = require('./getAppEnv');
+// let getAppEnv    = require('./getAppEnv');
 
 
 function routeTable (appEnv, userRoutes) {
-  
+  /*
     let root       = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '/logon' : `/${process.env.APPNAME}`;
     let homeb      = home.bind(null, appEnv);
     let getAppEnvb = getAppEnv.bind(null, appEnv);
+    */
     
+    /*
     let defaultRouteTable =
         [
-            {
-                method: ['GET'],
-                path  : `/appenv`,
-                config: {
-                    auth   : false,
-                    handler: getAppEnvb
-                }
-            },
             {
                 method: ['GET'],
                 path  : `${root}`,
@@ -53,7 +47,8 @@ function routeTable (appEnv, userRoutes) {
            
         ];
 
-
+    */
+   let defaultRouteTable = {};
     if (userRoutes !== null) {
         defaultRouteTable = defaultRouteTable.concat(userRoutes);
     }

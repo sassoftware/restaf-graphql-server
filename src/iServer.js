@@ -150,7 +150,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     await app.start();
    
     let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : server.info.uri;
-    console.log(` To view app goto ${u}/${appName}`);
+    console.log(`To logon to the server visit ${u}/${appName}`);
 }
 
 module.exports = iServer;
