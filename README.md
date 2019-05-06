@@ -33,9 +33,9 @@ npm install restaf-graphql-server
 
 ```
 
-## Running the server in your app
+## Running the server
 
-To start the server write a code as shown below in your app's entry point. This code passes the typeDefs and resolvers to setup the graphql server.
+Please see restaf-graphql-demo for using this server with your schema and resolvers..
 
 ```javascript
     // app.js
@@ -56,8 +56,8 @@ The information to connect to SAS Viya and other application specific informatio
 Since this server uses hapijs the routes must conform to hapijs specs for routes.
 The following routes are reserved
 
-1. graphql - for graphql playground
+1. /graphql - for graphql playground
 
-2. /{param*} - to serve up pages other than graphql
+2. /APPNAME - where APPNAME is specified in the env file - this is the main entry that will trigger a logon
 
 3. /appenv - to receive selected environment variables in your app -set in the env.js file
