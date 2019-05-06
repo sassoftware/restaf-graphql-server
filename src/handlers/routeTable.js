@@ -25,20 +25,12 @@ let getAppEnv    = require('./getAppEnv');
 
 function routeTable (appEnv, userRoutes) {
   
-    let root       = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '/' : `/${process.env.APPNAME}`;
+    let root       = (process.env.APPNAME == null || process.env.APPNAME === '/') ? '/logon' : `/${process.env.APPNAME}`;
     let homeb      = home.bind(null, appEnv);
     let getAppEnvb = getAppEnv.bind(null, appEnv);
     
     let defaultRouteTable =
         [
-            {
-                method: ['GET', 'POST'],
-                path  : `${root}callback`,
-                config: {
-                    auth   : false,
-                    handler: homeb
-                }
-            }, 
             {
                 method: ['GET'],
                 path  : `/appenv`,
@@ -49,7 +41,7 @@ function routeTable (appEnv, userRoutes) {
             },
             {
                 method: ['GET'],
-                path  : `/logon`,
+                path  : `${root}`,
                 config: {
                     auth: {
                         mode    : 'required',
@@ -65,7 +57,7 @@ function routeTable (appEnv, userRoutes) {
     if (userRoutes !== null) {
         defaultRouteTable = defaultRouteTable.concat(userRoutes);
     }
-    // console.log(defaultRouteTable);
+    console.log(defaultRouteTable);
 return defaultRouteTable
 }
 

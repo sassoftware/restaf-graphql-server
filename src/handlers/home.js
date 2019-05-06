@@ -24,12 +24,12 @@ async function home(appEnv, req){
     //
     // create id for user session and save credentials and set cookie in response
     //
-    console.log('in callback')
+    console.log('in callback');
     const sid = uuid.v4();
     let cache = req.server.app.cache;
     // await req.server.app.cache.set(sid, req.auth.credentials);
     await cache.set(sid, req.auth.credentials);
-    
+    console.log(req.auth.credentials);
     req.cookieAuth.set({sid});
 
     //
@@ -45,10 +45,10 @@ async function home(appEnv, req){
     //
     // now start the real session 
     // Use APPENTRY to start the app in the correct 
-    // if start with a / thenn it is a route path. otherwise it is a asset like index.html
+    // if start with a / then it is a route path. otherwise it is a asset like index.html
     //
 
-    return 'OK';
+    return {status: 'logon was successfull'};
    /*
     if (process.env.APPENTRY.indexOf('/') === 0) {
         console.log(`NOTE: Routed to ${process.env.APPENTRY}`);
