@@ -34,9 +34,7 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     let sConfig = {
         port: process.env.APPPORT,
         host: process.env.APPHOST,
-
-        /*debug: {request: ['error', 'log']},*/
-       
+     
         routes: {
             cors: {
                 origin     : ['*'],
@@ -68,7 +66,6 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     // setup ApolloServer
     //
     let t = (process.env.APPHOST === '0.0.0.0') ? `localhost` : `${process.env.APPHOST}`;
- 
     const server = new ApolloServer(
         { 
             typeDefs, 
@@ -146,9 +143,9 @@ async function iServer (typeDefs, resolvers, userRoutes, asset ,appEnv) {
     //
     // start hapi server
     //    
-    
+    debugger;
     await app.start();
-   
+   debugger;
     let u = (process.env.APPHOST === '0.0.0.0') ? `http://localhost:${process.env.APPPORT}` : server.info.uri;
     console.log(`To logon to the server visit ${u}/${appName}`);
 }
