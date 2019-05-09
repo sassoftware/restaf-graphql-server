@@ -28,7 +28,6 @@ async function home (appEnv, req, h) {
     let cache = req.server.app.cache;
     // await req.server.app.cache.set(sid, req.auth.credentials);
     await cache.set(sid, req.auth.credentials);
-    console.log(req.auth.credentials);
     req.cookieAuth.set({ sid });
 
     //
@@ -59,8 +58,10 @@ async function home (appEnv, req, h) {
         }
     } else {
         if (credentials.query.hasOwnProperty('next') === true) {
+            console.log(`NOTE: Redirecting to: ${credentials.query.next}`);
             return h.response().redirect(credentials.query.next);
         } else {
+            console.log(`NOTE: Responding with default`);
            return h.response({Note: 'Please use the back button to return to app'});
         }
     }
