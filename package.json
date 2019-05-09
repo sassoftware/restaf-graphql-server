@@ -1,6 +1,6 @@
 {
   "name": "restaf-graphql-server",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "description": "graphql server for Viya",
   "author": "Deva Kumaraswamy <deva.kumar@sas.com>",
   "license": "Apache-2.0",
