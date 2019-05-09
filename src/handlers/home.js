@@ -60,7 +60,6 @@ async function home (appEnv, req, h) {
     } else {
         if (credentials.query.hasOwnProperty('next') === true) {
             return h.response().redirect(credentials.query.next);
-           // return h.response(sendMessage(credentials.query.next));
         } else {
            return h.response({Note: 'Please use the back button to return to app'});
         }
