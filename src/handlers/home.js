@@ -16,31 +16,31 @@
  *
  */
 'use strict';
-let uuid   = require('uuid');
+let uuid = require('uuid');
 let restaf = require('restaf');
-let fs     = require('fs');
+let fs = require('fs');
 
-async function home(appEnv, req, h){
+async function home (appEnv, req, h) {
     //
     // create id for user session and save credentials and set cookie in response
     //
-    console.log('in callback');
     const sid = uuid.v4();
     let cache = req.server.app.cache;
     // await req.server.app.cache.set(sid, req.auth.credentials);
     await cache.set(sid, req.auth.credentials);
     console.log(req.auth.credentials);
-    req.cookieAuth.set({sid});
+    req.cookieAuth.set({ sid });
 
     //
     // Now setup restaf for this session and cache it for next call
     //
-    let store = await setupRestaf (req.auth.credentials);
+    let credentials = req.auth.credentials;
+    let store = await setupRestaf(credentials);
     await store.setAppData('appEnv', appEnv);
 
     // save store
 
-    await cache.set(sid+'store', store);
+    await cache.set(sid + 'store', store);
 
     //
     // now start the real session 
@@ -48,22 +48,29 @@ async function home(appEnv, req, h){
     // if start with a / then it is a route path. otherwise it is a asset like index.html
     //
 
-    if (process.env.TESTMODE === 'YES') {
+
+    if (process.env.APPMODE === 'YES') {
         if (process.env.APPENTRY.indexOf('/') === 0) {
             console.log(`NOTE: Routed to ${process.env.APPENTRY}`);
             return h.response().redirect(process.env.APPENTRY);
         } else {
             console.log(`NOTE: Displaying asset ${process.env.APPENTRY}`);
             return h.file(process.env.APPENTRY);
-        } 
+        }
     } else {
-       return {status: 'logon was successfull'};
-    } 
-}
+        if (credentials.query.hasOwnProperty('next') === true) {
+            return h.response().redirect(credentials.query.next);
+           // return h.response(sendMessage(credentials.query.next));
+        } else {
+           return h.response({Note: 'Please use the back button to return to app'});
+        }
+    }
+    
 
+}
 //
 // Basic restaf setup
-// needs restaf 18.1.0 or higher
+// needs restaf 1.2.0 or higher
 //
 async function setupRestaf (credentials) {
 
@@ -72,7 +79,7 @@ async function setupRestaf (credentials) {
 
     if (pemE != null) {
         let pem = fs.readFileSync(`${process.env.PEMFILE}`);
-        options = {pem: pem};
+        options = { pem: pem };
     }
     let store = restaf.initStore(options);
     let payload = {
@@ -81,7 +88,7 @@ async function setupRestaf (credentials) {
         token    : credentials.token,
         tokenType: 'bearer'
     };
-    await store.logon (payload);
+    await store.logon(payload);
 
     if (process.env.SERVICES != null) {
         let defaultServices;
@@ -93,10 +100,10 @@ async function setupRestaf (credentials) {
     return store;
 }
 
-function getUserServices() {
+function getUserServices () {
     let s = process.env.SERVICES.split(',');
     let d = [];
-    s.map (ss => {
+    s.map(ss => {
         let t = ss.trim();
         if (t.length > 0) {
             d.push(t)
@@ -105,4 +112,5 @@ function getUserServices() {
 
     return d;
 }
+
 module.exports = home;
