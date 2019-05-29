@@ -20,7 +20,7 @@
 let bell       = require('bell'),
 // eslint-disable-next-line no-unused-vars
     uuid       = require('uuid'),
-    cookie     = require('hapi-auth-cookie');
+    cookie     = require('@hapi/cookie');
 
 async function SASauth (hapiServer) {
 
@@ -30,10 +30,12 @@ async function SASauth (hapiServer) {
 
         //TBD: do we need keepalive?
     authCookieOptions = {
-        password  : uuid.v4(),
-        cookie    : 'authCookie',
-        isSecure  : false,
-        isSameSite: (process.env.SAMESITE != null) ? process.env.SAMESITE : 'Strict',
+        cookie: {
+            password  : uuid.v4(),
+            name      : 'authCookie',
+            isSecure  : false,
+            isSameSite: (process.env.SAMESITE != null) ? process.env.SAMESITE : 'Strict'
+        },
         
         validateFunc: async function (req, session) {
             let credentials = await req.server.app.cache.get(session.sid);

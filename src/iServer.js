@@ -17,8 +17,8 @@
  */
 
 const { ApolloServer } = require('apollo-server-hapi');
-let Hapi      = require('hapi');
-let inert     = require('inert');
+let Hapi      = require('@hapi/hapi');
+let inert     = require('@hapi/inert');
 let NodeCache = require('node-cache-promise');
 
 let routeTable   = require('./handlers/routeTable');
