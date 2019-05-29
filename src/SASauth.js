@@ -17,7 +17,7 @@
  */
 'use strict';
 
-let bell       = require('bell'),
+let bell       = require('@hapi/bell'),
 // eslint-disable-next-line no-unused-vars
     uuid       = require('uuid'),
     cookie     = require('@hapi/cookie');
