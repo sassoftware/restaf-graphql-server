@@ -48,7 +48,8 @@ function iconfig (appEnv, cb) {
                 let envName = la[ 0 ];
                 if (la.length > 0) {
                     if (la[ 1 ] === '') {
-                        delete process.env[ envName ];
+                        console.log(`Note: ${envName} is inherited as ${process.env[envName]}`);
+                        // delete process.env[ envName ];
                     } else {
                         process.env[ envName ] = la[ 1 ];
                     }
