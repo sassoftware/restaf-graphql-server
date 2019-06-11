@@ -1,5 +1,9 @@
 # next
 
+## Version 0.4.0
+
+- Inherit environment variables if it is not overridden in the env file
+
 ## Version 0.3.0
 
 - Allow setting the list of services in the env file. Removed the defaults.
