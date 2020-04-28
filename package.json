@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "main": "./src/index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "node test.js --env=test.env --appenv=testEnv.js",
     "test": "node test.js --env=../graphql.env --appenv=testEnv.js",
     "test2": "node test.js --env=../graphql2.env --appenv=testEnv.js",
@@ -33,7 +34,7 @@
     "@hapi/bell": "^10.1.0",
     "@hapi/cookie": "^10.1.0",
     "@hapi/good": "^8.2.0",
-    "@hapi/hapi": "^18.3.1",
+    "@hapi/hapi": "^18.4.1",
     "@hapi/inert": "^5.2.0",
     "apollo-server-hapi": "^2.5.0",
     "babel-polyfill": "^6.26.0",
@@ -50,5 +51,8 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "eslint": "^5.12.1"
+  },
+  "resolutions": {
+    "minimist": ">=1.2.3"
   }
 }
