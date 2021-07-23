@@ -1,4 +1,5 @@
-# restaf-graphql-server
+# restaf-graphql-server (acrchived)
+## This repository is archived and is no longer accepting contributrions or addressing issues.
 
 The restaf-graphql-server is designed to work with SAS Vya. It uses three key open source projects"
 
